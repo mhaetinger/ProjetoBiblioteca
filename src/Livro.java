@@ -7,6 +7,13 @@ public class Livro {
     private EnumCategoria categoria;
 
 
+
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Título: '" + titulo + "', Autor: " + autor +
+                ", Data de Publicação: " + dataPublicacao + ", Categoria: " + categoria;
+    }
+
     public int getId() {
         return id;
     }

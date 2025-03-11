@@ -13,25 +13,63 @@ public class Biblioteca {
     }
 
     public void addLivro(String titulo, String autor, String dataPublicacao, EnumCategoria categoria) {
-
         Livro livro = new Livro();
 
-        livro.setId(this.acervo.size()+1);
-        livro.setAutor(titulo);
+        livro.setId(acervo.size() + 1); //ordena o id baseado no tamanho
+        livro.setTitulo(titulo);
         livro.setAutor(autor);
         livro.setDataPublicacao(dataPublicacao);
         livro.setCategoria(categoria);
 
-        this.acervo.add(livro);
+        acervo.add(livro); // Adiciona à lista da biblioteca
+        System.out.println("Livro '" + titulo + "' adicionado com sucesso!");
     }
+
+    public void removerLivro(int id) {
+        for (Livro livro : acervo) {
+            if (livro.getId() == id) {
+                acervo.remove(livro);
+                System.out.println("Livro removido com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Livro não encontrado!");
+    }
+
+
+    public void listarLivros() {
+        if (acervo.isEmpty()) {
+            System.out.println("A biblioteca está vazia");
+        } else {
+            System.out.println("Livros na biblioteca '" + nome + "':");
+            for (Livro livro : acervo) {
+                System.out.println(livro);
+            }
+        }
+    }
+
+    public int contarLivros(){
+        return acervo.size();
+    }
+
 
     @Override
     public String toString() {
-        String ret = "nome: " + this.nome;
-        ret += "\nAcervo\n";
-        for (Livro o : acervo) {
-            ret += o.toString() + "\n";
+        String ret = "Nome: " + this.nome;
+        if (!acervo.isEmpty()) {
+            ret += "\nAcervo:";
+            for (Livro o : acervo) {
+                ret += "\n" + o.toString();
+            }
         }
         return ret;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
