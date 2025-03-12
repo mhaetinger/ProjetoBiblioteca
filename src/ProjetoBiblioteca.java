@@ -64,7 +64,7 @@ public class ProjetoBiblioteca {
                                 System.out.println("2 - Remover livro");
                                 System.out.println("3 - Ver lista de livros");
                                 System.out.println("4 - Total de livros");
-                                System.out.println("5 - Excluir toda a biblioteca");
+                                System.out.println("5 - Excluir todo o os livros");
                                 System.out.println("0 - Sair da biblioteca");
                                 int opcao2 = entrada.nextInt();
                                 entrada.nextLine();
@@ -116,16 +116,17 @@ public class ProjetoBiblioteca {
                                         bibliotecaSelecionada.listarLivros();
                                         break;
                                     case 4:
-                                        System.out.println("\nTotal de livros na biblioteca é" + bibliotecaSelecionada.contarLivros());
+                                        System.out.println("\nTotal de livros na biblioteca é '" + bibliotecaSelecionada.contarLivros() + "'");
                                         break;
                                     case 5:
-                                        System.out.println("\nBiblioteca excluida com sucesso!");
-                                        return;
+                                        bibliotecaSelecionada.limparAcervo();
+                                        break;
                                     case 0:
                                         System.out.println("\nSaindo...");
-                                        return;
+                                        menuBiblioteca = false;
+                                        break;
                                     default:
-                                        System.out.println("\nOpção invalida");
+                                        System.out.println("\nOpção inválida");
                                 }
 
                             }while (menuBiblioteca);
@@ -134,23 +135,40 @@ public class ProjetoBiblioteca {
                         }
                     }
                     break;
+
+
                 case 3:
-                    System.out.println("\nDigite o id da biblioteca que deseja remover: ");
-                    int id = entrada.nextInt();
-                    entrada.nextLine();
+                    if (bibliotecas.isEmpty()){
+                        System.out.println("\nNenhuma biblioteca cadastrada.");
+                    } else{
+                        System.out.println("\nBiblioteca disponiveis");
+                        for (int i = 0; i < bibliotecas.size(); i++){
+                            System.out.println((i+1) + " - " + bibliotecas.get(i).getNome());
+                        }
+
+                        System.out.println("\nSelecione a biblioteca que deseja remover: ");
+                        int escolha = entrada.nextInt();
+                        entrada.nextLine();
+
+                        if (escolha > 0 && escolha <= bibliotecas.size()) {
+                            Biblioteca removida = bibliotecas.remove(escolha - 1);
+                            System.out.println("Biblioteca '" + removida.getNome() + "' excluida.");
+                        } else {
+                            System.out.println("\nOpção inválida");
+                        }
+                    }
                     break;
+
+
                 case 0:
                     System.out.println("\nSaindo...");
+                    menu = false;
                     break;
 
 
                 default:
                     System.out.println("\nOpção invalida");
             }
-
-
-
-
         }while (menu);
 
     }
