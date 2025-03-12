@@ -39,7 +39,7 @@ public class Biblioteca {
 
     public void listarLivros() {
         if (acervo.isEmpty()) {
-            System.out.println("A biblioteca está vazia");
+            System.out.println("\nA biblioteca está vazia");
         } else {
             System.out.println("Livros na biblioteca '" + nome + "':");
             for (Livro livro : acervo) {
@@ -63,6 +63,11 @@ public class Biblioteca {
             }
         }
         return ret;
+    }
+
+    public void limparAcervo() {
+        acervo.clear();
+        System.out.println("Todos os livros foram removidos da biblioteca.");
     }
 
     public String getNome() {
